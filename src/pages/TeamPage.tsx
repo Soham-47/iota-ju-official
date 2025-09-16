@@ -110,7 +110,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Anish Chanda',
         role: 'Head of Content',
         department: 'ETCE',
-        image: '/public/assets/team images/Koach.png',
+        image: '/assets/team images/Koach.png',
         bio: 'Overseeing content strategy and development for IOTA JU Chapter.',
         social: {
           linkedin: 'https://www.linkedin.com/in/anish-chanda',
