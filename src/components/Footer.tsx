@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Github } from 'lucide-react';
-import iotaLogo from '@/assets/iota-logo.png';
+const iotaLogo = '/assets/common/iota-logo.png';
 
 const Footer = () => {
   return (

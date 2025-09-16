@@ -62,7 +62,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Dr. Chinmoy Ghorai',
         role: 'Faculty Advisor',
         department: 'ETCE',
-        image: 'src/assets/team images/chinmoysir.jpeg',
+        image: '/assets/team images/chinmoysir.jpeg',
         bio: 'Faculty advisor providing guidance and support for the IOTA JU Chapter.',
         social: {
           linkedin: 'https://www.linkedin.com/in/dr-chinmoy-ghorai',
@@ -75,7 +75,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Dr. Sheli Sinha Chaudhuri',
         role: 'Faculty Co-Advisor',
         department: 'ETCE',
-        image: 'src/assets/team images/shelimaam.jpeg',
+        image: '/assets/team images/shelimaam.jpeg',
         bio: 'Faculty co-advisor supporting the IOTA JU Chapter initiatives and activities.',
         social: {
           linkedin: 'https://www.linkedin.com/in/dr-sheli-sinha-chaudhuri',
@@ -95,7 +95,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Saptarshi Garai',
         role: 'Head of Public Relations and Operations',
         department: 'ETCE',
-        image: 'src/assets/team images/saptarshi.jpeg',
+        image: '/assets/team images/saptarshi.jpeg',
         bio: 'Leading public relations and operational strategies for IOTA JU Chapter.',
         social: {
           linkedin: 'https://www.linkedin.com/in/saptarshi-garai',
@@ -110,7 +110,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Anish Chanda',
         role: 'Head of Content',
         department: 'ETCE',
-        image: 'src/assets/team images/Koach.png',
+        image: '/public/assets/team images/Koach.png',
         bio: 'Overseeing content strategy and development for IOTA JU Chapter.',
         social: {
           linkedin: 'https://www.linkedin.com/in/anish-chanda',
@@ -125,7 +125,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Anurag Kar',
         role: 'Head of Tech',
         department: 'ETCE',
-        image: 'src/assets/team images/Anurag.jpeg',
+        image: '/assets/team images/Anurag.jpeg',
         bio: 'Leading the technical initiatives and development at IOTA JU Chapter.',
         social: {
           linkedin: 'https://www.linkedin.com/in/anurag-kar',
@@ -140,7 +140,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Nayan Singha',
         role: 'Head of Design',
         department: 'ETCE',
-        image: 'src/assets/team images/Nayan.png',
+        image: '/assets/team images/Nayan.png',
         bio: 'Leading the design vision and creative direction for IOTA JU Chapter.',
         social: {
           linkedin: 'https://www.linkedin.com/in/nayan-singha',
@@ -154,7 +154,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Srijan Roy',
         role: 'Head of Web Development',
         department: 'ETCE',
-        image: 'src/assets/team images/srijan.jpg',
+        image: '/assets/team images/srijan.jpg',
         bio: 'Leading web development initiatives and technical implementations.',
         social: {
           linkedin: 'https://www.linkedin.com/in/srijan-roy',
@@ -169,7 +169,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Parthiv Paul',
         role: 'Board Member',
         department: 'ETCE',
-        image: 'src/assets/team images/parthiv.jpeg',
+        image: '/assets/team images/parthiv.jpeg',
         bio: 'Contributing to the strategic direction and initiatives of IOTA JU Chapter.',
         social: {
           linkedin: 'https://www.linkedin.com/in/parthiv-paul',
@@ -191,7 +191,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Soham Saha',
         role: 'Lead Developer',
         department: 'Web Development',
-        image: '/src/assets/team images/sohamsaha.jpg',
+        image: '/assets/team images/sohamsaha.jpg',
         bio: 'Full-stack developer with expertise in modern web technologies and blockchain integration.',
         social: {
           linkedin: '#',
@@ -205,7 +205,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Soumojeet Pan',
         role: 'Frontend Developer',
         department: 'Web Development',
-        image: '/src/assets/team images/soumojeet.jpg',
+        image: '/assets/team images/soumojeet.jpg',
         bio: 'Passionate about creating beautiful and responsive user interfaces.',
         social: {
           linkedin: '#',
@@ -219,7 +219,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Trishita Biswas',
         role: 'Backend Developer',
         department: 'Web Development',
-        image: '/src/assets/team images/trishita.jpeg',
+        image: '/assets/team images/Trishita.jpeg',
         bio: 'Backend specialist with experience in building scalable APIs.',
         social: {
           linkedin: '#',
@@ -233,7 +233,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Arnab Kuiry',
         role: 'Full Stack Developer',
         department: 'Web Development',
-        image: '/src/assets/team images/arnabkuiry.jpg',
+        image: '/assets/team images/arnabkuiry.jpg',
         bio: 'Versatile developer with experience across the stack.',
         social: {
           linkedin: '#',
@@ -247,7 +247,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Abhay Singh',
         role: 'Blockchain Developer',
         department: 'Web Development',
-        image: '/src/assets/team images/abhay.jpg',
+        image: '/public/assets/team images/abhay.jpg',
         bio: 'Specialized in blockchain integration and smart contracts.',
         social: {
           linkedin: '#',
@@ -261,7 +261,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Anik Das',
         role: 'UI/UX Developer',
         department: 'Web Development',
-        image: '/src/assets/team images/AnikDas.jpeg',
+        image: '/assets/team images/AnikDas.jpeg',
         bio: 'Focused on creating intuitive user experiences.',
         social: {
           linkedin: '#',
@@ -275,7 +275,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Arghya Pratim Biswas',
         role: 'DevOps Engineer',
         department: 'Web Development',
-        image: '/src/assets/team images/arghyapratim.jpg',
+        image: '/assets/team images/arghyapratim.jpg',
         bio: 'Ensuring smooth deployments and infrastructure.',
         social: {
           linkedin: '#',
@@ -289,7 +289,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Nilay Agarwal',
         role: 'Frontend Developer',
         department: 'Web Development',
-        image: '/src/assets/team images/nilayagarwal.jpg',
+        image: '/assets/team images/nilayagarwal.jpg',
         bio: 'Passionate about building responsive and accessible web applications.',
         social: {
           linkedin: '#',
@@ -310,7 +310,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Devanjan Biswas',
         role: 'PR & Logistics Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/devanjan.jpg',
+        image: '/assets/team images/devanjan.jpg',
         bio: 'Dedicated to managing public relations and ensuring smooth operations.',
         social: {
           linkedin: 'https://www.linkedin.com/in/devanjan-biswas',
@@ -324,7 +324,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Arka Chatterjee',
         role: 'PR & Logistics Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/arka.jpg',
+        image: '/assets/team images/arka.jpg',
         bio: 'Passionate about building relationships and managing communications.',
         social: {
           email: 'arkachatterjee857@gmail.com',
@@ -337,7 +337,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Manish Kumar',
         role: 'PR & Logistics Team Member',
         department: 'ETCE',
-        image: '/src/assets/team images/manish.jpg',
+        image: '/assets/team images/manish.jpg',
         bio: 'Skilled in media relations and strategic communications.',
         social: {
           email: 'mkmkumar282@gmail.com',
@@ -350,7 +350,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Sudipto Biswas',
         role: 'PR & Logistics Team Member',
         department: 'Chemical Engineering',
-        image: 'src/assets/team images/sudiptobiswas.jpeg',
+        image: '/assets/team images/sudiptobiswas.jpeg',
         bio: 'Committed to effective communication and public relations.',
         social: {
           linkedin: 'https://www.linkedin.com/in/sudipto-biswas',
@@ -364,7 +364,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Sahana Sharmin',
         role: 'PR & Logistics Team Member',
         department: 'Architecture Engineering',
-        image: 'src/assets/team images/sahanasharmin.jpg',
+        image: '/assets/team images/sahanasharmin.jpg',
         bio: 'Passionate about building connections and managing public relations.',
         social: {
           email: 'sahanasarmin54@gmail.com',
@@ -377,7 +377,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Munmun Biswas',
         role: 'PR & Logistics Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/mumunbiswas.jpg',
+        image: '/assets/team images/mumunbiswas.jpg',
         bio: 'Dedicated to managing logistics and public relations effectively.',
         social: {
           linkedin: 'https://www.linkedin.com/in/munmun-biswas',
@@ -391,7 +391,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Avik Das',
         role: 'PR & Logistics Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/avik.jpg',
+        image: '/assets/team images/avik.jpg',
         bio: 'Skilled in managing public relations and logistics operations.',
         social: {
           linkedin: 'https://www.linkedin.com/in/avik-das',
@@ -412,7 +412,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Maitreya Gupta',
         role: 'Tech Team Member',
         department: 'ETCE',
-        image: '/src/assets/team images/maitreyoda.jpeg',
+        image: '/assets/team images/maitreyoda.jpeg',
         bio: 'Passionate about AI/ML and its real-world applications.',
         social: {
           linkedin: 'https://www.linkedin.com/in/maitreya-gupta',
@@ -427,7 +427,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Deepra Basak',
         role: 'Tech Team Member',
         department: 'Electrical Engineering',
-        image: '/src/assets/team images/Deepra Basak.jpeg',
+        image: '/assets/team images/Deepra Basak.jpeg',
         bio: 'Focused on hardware design and embedded systems development.',
         social: {
           instagram: 'https://instagram.com/basakdeepra',
@@ -440,7 +440,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Arnab Karmakar',
         role: 'Tech Team Member',
         department: 'ETCE',
-        image: '/src/assets/team images/arnabkarmakar.jpg',
+        image: '/assets/team images/arnabkarmakar.jpg',
         bio: 'Expert in embedded systems and firmware development.',
         social: {
           linkedin: 'https://www.linkedin.com/in/arnab-karmakar',
@@ -454,7 +454,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Subhojit Khatua',
         role: 'Tech Team Member',
         department: 'ETCE',
-        image: '/src/assets/team images/subhojeetkhatua.jpeg',
+        image: '/assets/team images/subhojeetkhatua.jpeg',
         bio: 'Specialized in computer vision and machine learning applications.',
         social: {
           linkedin: 'https://www.linkedin.com/in/subhojit-khatua',
@@ -469,7 +469,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Saikat Dutta',
         role: 'Tech Team Member',
         department: 'Chemical Engineering',
-        image: '/src/assets/team images/saikat.png',
+        image: '/assets/team images/saikat.png',
         bio: 'Focused on AI model optimization and deployment.',
         social: {
           linkedin: 'https://www.linkedin.com/in/saikat-dutta',
@@ -490,7 +490,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Rohit Sharma',
         role: 'Design Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/ROHITSHARMA.jpeg',
+        image: '/assets/team images/ROHITSHARMA.jpeg',
         bio: 'Creative designer passionate about creating impactful visual experiences.',
         social: { 
           github: 'https://github.com/Rohits-007',
@@ -505,7 +505,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Ayantika Datta',
         role: 'Design Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/ayantika.jpeg',
+        image: '/assets/team images/ayantika.jpeg',
         bio: 'Passionate about creating intuitive and beautiful user experiences through design.',
         social: { 
           linkedin: 'https://www.linkedin.com/in/ayantika-datta',
@@ -520,7 +520,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Shoumik Mukherjee',
         role: 'Design Team Member',
         department: 'Mechanical Engineering',
-        image: 'src/assets/team images/shoumikmukherjee.jpg',
+        image: '/assets/team images/shoumikmukherjee.jpg',
         bio: 'Bringing creative solutions to life through thoughtful design and innovation.',
         social: {
           linkedin: 'https://www.linkedin.com/in/shoumik-mukherjee',
@@ -541,7 +541,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Koushik Kar',
         role: 'Content Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/koushikkar.jpeg',
+        image: '/assets/team images/koushikkar.jpeg',
         bio: 'Passionate about creating informative and engaging content about blockchain technology.',
         social: {
           github: 'https://github.com/kousik2006',
@@ -556,7 +556,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Pranjal Deb',
         role: 'Content Team Member',
         department: 'Printing and Packaging Engineering',
-        image: 'src/assets/team images/pranjal.jpeg',
+        image: '/assets/team images/pranjal.jpeg',
         bio: 'Skilled in creating compelling narratives and visual content.',
         social: {
           linkedin: 'https://www.linkedin.com/in/pranjal-deb',
@@ -569,7 +569,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Mrittika Biswas',
         role: 'Content Team Member',
         department: 'Electrical Engineering',
-        image: 'src/assets/team images/mrittikabiswas.jpeg',
+        image: '/assets/team images/mrittikabiswas.jpeg',
         bio: 'Passionate about technical writing and content development.',
         social: {
           linkedin: 'https://www.linkedin.com/in/mrittika-biswas',
@@ -582,7 +582,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Aratrika Pahari',
         role: 'Content Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/aratrikapahari.jpg',
+        image: '/assets/team images/aratrikapahari.jpg',
         bio: 'Creating engaging and informative content about technology.',
         social: {
           linkedin: 'https://www.linkedin.com/in/aratrika-pahari',
@@ -595,7 +595,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Sandip Ghosh',
         role: 'Content Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/Sandipghosh.jpeg',
+        image: '/assets/team images/Sandipghosh.jpeg',
         bio: 'Dedicated to creating high-quality technical content.',
         social: {
           linkedin: 'https://www.linkedin.com/in/sandip-ghosh',
@@ -609,7 +609,7 @@ const teamDepartments: TeamDepartment[] = [
         name: 'Akashdeep Yadav',
         role: 'Content Team Member',
         department: 'ETCE',
-        image: 'src/assets/team images/akashdeepyadav.jpeg',
+        image: '/assets/team images/akashdeepyadav.jpeg',
         bio: 'Passionate about creating engaging and informative content about technology.',
         social: {
           linkedin: 'https://www.linkedin.com/in/akashdeep-yadav',

@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ArrowDown, ArrowRight, ArrowLeft, Sparkles, Cpu, Code, Wifi } from 'lucide-react';
 
-// Placeholder images - replace with actual imports
-const hero1 = 'src/assets/projects.jpg';
-const hero2 = 'src/assets/events.jpg';
-const hero3 = 'src/assets/hero1.jpg';
+// Images from public folder - make sure these filenames match exactly with the files in public/assets/common/
+const hero1 = '/assets/common/hero1.jpg';
+const hero2 = '/assets/common/events.jpg';
+const hero3 = '/assets/common/team.jpg';
 
 interface Slide {
   image: string;

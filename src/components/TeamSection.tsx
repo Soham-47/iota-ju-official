@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Linkedin, Github, Mail, Users, Award, Code, Lightbulb } from 'lucide-react';
-import teamImage from '@/assets/team.jpg';
+const teamImage = '/assets/common/team.jpg';
 
 const TeamSection = () => {
   const teamStats = [
