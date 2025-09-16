@@ -6,27 +6,33 @@ import eventsImage from '@/assets/events.jpg';
 const EventsSection = () => {
   const upcomingEvents = [
     {
-      title: 'IoT Innovation Hackathon 2024',
-      date: 'March 15-17, 2024',
-      location: 'JU Tech Park',
-      participants: '200+ participants',
-      description: 'Build innovative IoT solutions for smart cities',
+      title: 'Connexion 2025',
+      date: 'December, 2025',
+      location: 'Jadavpur University, Kolkata',
+      description: 'Build innovative IoT solutions for given problem statements',
       status: 'Upcoming'
     },
     {
-      title: 'Smart Home Workshop',
-      date: 'February 28, 2024',
-      location: 'Electronics Lab',
-      participants: '50 participants',
-      description: 'Hands-on workshop on home automation systems',
+      title: 'Orientation 2025',
+      date: 'November, 2025',
+      location: 'Jadavpur University, Kolkata',
+      description: 'Orientation of new members',
       status: 'Upcoming'
     },
     {
-      title: 'Industry Expert Seminar',
-      date: 'February 20, 2024',
-      location: 'Auditorium Hall',
-      participants: '150 participants',
-      description: 'Learn from industry leaders about IoT trends',
+      title: 'Lord of the Rings',
+      date: 'June, 2025',
+      location: 'Jadavpur University, Kolkata',
+      participants: '100+ participants',
+      description: 'Compete with your remote-controlled cars in a contest ',
+      status: 'Completed'
+    },
+    {
+      title: 'Innovatia 2025',
+      date: 'July, 2025',
+      location: 'Jadavpur University, Kolkata',
+      participants: '50+ participants',
+      description: 'Hands-on workshop on IoT ',
       status: 'Completed'
     }
   ];

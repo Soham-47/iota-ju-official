@@ -1,7 +1,9 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Github, Cpu, Zap, Wifi, Brain } from 'lucide-react';
+import { ExternalLink, Github, Cpu, Zap, Wifi, Brain, ArrowRight, Code, Server, Smartphone, Database } from 'lucide-react';
 import projectsImage from '@/assets/projects.jpg';
 
 const ProjectsSection = () => {
@@ -49,104 +51,153 @@ const ProjectsSection = () => {
     }
   };
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
+
   return (
-    <section id="projects" className="py-20">
+    <section id="projects" className="py-20 relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(var(--primary)/0.1),transparent_70%)]" />
+      </div>
+
       <div className="container mx-auto px-4">
-        {/* Projects Hero */}
-        <div className="relative rounded-2xl overflow-hidden mb-16 h-96">
-          <img
-            src={projectsImage}
-            alt="IoT Projects"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-transparent flex items-center">
-            <div className="max-w-2xl mx-8 text-white">
-              <h2 className="text-4xl font-bold mb-4">Projects</h2>
-              <h3 className="text-2xl font-semibold mb-4">Ongoing and Past IoT Projects</h3>
-              <p className="text-lg mb-6">
-                Discover our top projects involving smart automation, 
-                connected devices, environmental monitoring, and AI-powered systems.
-              </p>
-              <Button 
-                size="lg"
-                className="bg-gradient-primary hover:shadow-glow transition-all duration-500"
-              >
-                <Github className="mr-2 h-5 w-5" />
-                Explore Projects
-              </Button>
-            </div>
-          </div>
-        </div>
+        {/* Section Header */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className="inline-block px-3 py-1 text-sm font-medium rounded-full bg-primary/10 text-primary mb-4">
+            Our Work
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
+            Featured Projects
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Explore our innovative IoT solutions that are making an impact on campus and beyond.
+          </p>
+        </motion.div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <Card key={index} className="group hover:shadow-glow transition-all duration-500 hover:-translate-y-2 border-2 hover:border-primary/50">
-              <CardContent className="p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 rounded-lg bg-primary/20 text-primary">
+        <motion.div 
+          className="grid md:grid-cols-2 gap-8"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          <AnimatePresence>
+            {projects.map((project, index) => (
+              <motion.div 
+                key={index}
+                variants={item}
+                className="h-full"
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              >
+                <Card className="h-full flex flex-col overflow-hidden border-border/30 hover:border-primary/50 transition-all duration-300 group">
+                  <div className="relative h-48 overflow-hidden">
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/20">
                       {project.icon}
                     </div>
-                    <div>
-                      <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
-                        {project.title}
-                      </h3>
-                      <Badge variant="secondary" className="mt-1">
-                        {project.category}
-                      </Badge>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                      <div>
+                        <Badge variant="secondary" className="mb-2">
+                          {project.category}
+                        </Badge>
+                        <span className={`text-sm px-3 py-1 rounded-full font-medium ${getStatusColor(project.status)}`}>
+                          {project.status}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(project.status)}`}>
-                    {project.status}
-                  </span>
-                </div>
-                
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.technologies.map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="outline" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-                
-                <div className="flex space-x-3">
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="flex-1 group-hover:bg-primary group-hover:text-primary-foreground transition-all"
-                  >
-                    <ExternalLink className="mr-2 h-4 w-4" />
-                    View Details
-                  </Button>
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    className="flex-1"
-                  >
-                    <Github className="mr-2 h-4 w-4" />
-                    Source Code
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                  
+                  <CardHeader>
+                    <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
+                      {project.title}
+                    </CardTitle>
+                    <CardDescription className="line-clamp-2">
+                      {project.description}
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  <CardContent className="flex-grow">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.technologies.map((tech, techIndex) => (
+                        <Badge 
+                          key={techIndex} 
+                          variant="outline" 
+                          className="text-xs bg-background/50 backdrop-blur-sm"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                  
+                  <CardFooter className="border-t border-border/30 p-4">
+                    <div className="flex w-full gap-2">
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="flex-1 group-hover:bg-primary/10 group-hover:border-primary/30 transition-colors"
+                      >
+                        <ExternalLink className="h-4 w-4 mr-2" />
+                        View Details
+                      </Button>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        className="group-hover:bg-primary/5 transition-colors"
+                      >
+                        <Github className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </CardFooter>
+                </Card>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
 
         {/* CTA Section */}
-        <div className="text-center mt-12">
-          <h3 className="text-2xl font-bold mb-4">Want to Contribute?</h3>
+        <motion.div 
+          className="mt-20 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          <h3 className="text-2xl font-bold mb-4">Have an Idea for a Project?</h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Join our project teams and help build the future of IoT. We welcome contributors of all skill levels.
+            We're always looking for innovative ideas and passionate individuals to join our team.
           </p>
-          <Button size="lg" className="bg-gradient-primary hover:shadow-glow transition-all duration-500">
-            Join a Project Team
-          </Button>
-        </div>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button size="lg" className="group">
+              Propose a Project
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Button variant="outline" size="lg" className="group">
+              Join Our Team
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
