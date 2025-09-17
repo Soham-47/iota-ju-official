@@ -23,22 +23,39 @@ const Footer = () => {
               Internet of Things Applications Club at Jadavpur University. 
               Exploring the future of connected technology and smart systems.
             </p>
-            <div className="flex space-x-3">
-              <Button variant="ghost" size="sm">
+            <div className="flex space-x-2">
+              <a 
+                href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
+              >
                 <Facebook className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm">
-                <Twitter className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm">
+              </a>
+              <a 
+                href="https://www.instagram.com/iota_ju/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
+              >
                 <Instagram className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm">
+              </a>
+              <a 
+                href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
+              >
                 <Linkedin className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" size="sm">
+              </a>
+              <a 
+                href="https://github.com/IoTA-Jadavpur-Univeristy" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center h-9 w-9 rounded-full bg-secondary hover:bg-secondary/80 transition-colors"
+              >
                 <Github className="h-4 w-4" />
-              </Button>
+              </a>
             </div>
           </div>
 
@@ -111,7 +128,7 @@ const Footer = () => {
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <div className="text-sm text-muted-foreground">
-            © 2024 IOTA - Jadavpur University. All rights reserved.
+            © 2025 IOTA - Jadavpur University. All rights reserved.
           </div>
           <div className="flex space-x-6 text-sm">
             <a href="#" className="text-muted-foreground hover:text-primary transition-colors">

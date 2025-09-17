@@ -1,13 +1,42 @@
+/**
+ * Team Page Component
+ * 
+ * Displays the team members in an organized, interactive layout with animations.
+ * Features:
+ * - Department-wise categorization of team members
+ * - Animated cards with hover effects
+ * - Social media links and skill tags
+ * - Responsive grid layout
+ */
+
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
+
+// UI Components
 import { Separator } from '@/components/ui/separator';
 import { Button } from '@/components/ui/button';
-import { Linkedin, Github, Mail, Twitter, Instagram, Youtube, BookOpen } from 'lucide-react';
+
+// Icons from Lucide React
+import { 
+  Linkedin, Github, Mail, Twitter, Instagram, Youtube, BookOpen 
+} from 'lucide-react';
+
+// Utility functions
 import { cn } from '@/lib/utils';
 
-// Simple fallback for social icons
+/**
+ * SocialIcon Component
+ * 
+ * Renders the appropriate social media icon based on the platform.
+ * Supports: LinkedIn, GitHub, Twitter, Email, YouTube, Instagram, Medium
+ * 
+ * @param {string} platform - The social media platform
+ * @param {object} props - Additional props to pass to the icon
+ * @returns {JSX.Element|null} The corresponding icon component or null if not found
+ */
 const SocialIcon = ({ platform, ...props }: { platform: string; [key: string]: any }) => {
-  const Icon = {
+  // Map of platform names to their corresponding icon components
+  const iconMap = {
     linkedin: Linkedin,
     github: Github,
     twitter: Twitter,
@@ -15,47 +44,70 @@ const SocialIcon = ({ platform, ...props }: { platform: string; [key: string]: a
     youtube: Youtube,
     instagram: Instagram,
     medium: BookOpen,
-  }[platform];
+  };
 
+  const Icon = iconMap[platform as keyof typeof iconMap];
   if (!Icon) return null;
+  
   return <Icon {...props} />;
 };
 
 
+/**
+ * TeamMember Type
+ * 
+ * Defines the structure of a team member object
+ */
 type TeamMember = {
-  id: string;
-  name: string;
-  role: string;
-  department: string;
-  image: string;
-  bio: string;
-  social: {
-    linkedin?: string;
-    github?: string;
-    twitter?: string;
-    email?: string;
-    behance?: string;
-    dribbble?: string;
-    youtube?: string;
-    instagram?: string;
-    medium?: string;
-    spotify?: string;
+  id: string;               // Unique identifier for the team member
+  name: string;             // Full name of the team member
+  role: string;             // Role/position in the team
+  department: string;       // Department/team they belong to
+  image: string;            // URL to the team member's photo
+  bio: string;              // Short biography or description
+  social: {                 // Social media links (all optional)
+    linkedin?: string;      // LinkedIn profile URL
+    github?: string;        // GitHub profile URL
+    twitter?: string;       // Twitter profile URL
+    email?: string;         // Email address
+    behance?: string;       // Behance portfolio URL
+    dribbble?: string;      // Dribbble portfolio URL
+    youtube?: string;       // YouTube channel URL
+    instagram?: string;     // Instagram profile URL
+    medium?: string;        // Medium profile URL
+    spotify?: string;       // Spotify profile URL
   };
-  skills: string[];
+  skills: string[];         // Array of skills/tags
 };
 
+/**
+ * TeamDepartment Type
+ * 
+ * Groups team members by their department/team
+ */
 type TeamDepartment = {
-  id: string;
-  name: string;
-  description: string;
-  members: TeamMember[];
+  id: string;               // Unique identifier for the department
+  name: string;             // Name of the department
+  description: string;      // Description of the department
+  members: TeamMember[];    // Array of team members in this department
 };
 
+/**
+ * Team Departments Data
+ * 
+ * Contains the complete organizational structure of the IOTA JU team.
+ * Organized by departments with each department containing:
+ * - Department metadata (id, name, description)
+ * - Array of team members with their details
+ * 
+ * This data powers the team page and is used to render department sections
+ * and individual team member cards.
+ */
 const teamDepartments: TeamDepartment[] = [
   {
     id: 'advisors',
     name: 'Faculty Advisors',
-    description: 'Guiding the chapter with their expertise and wisdom',
+    description: 'Guiding the team with their expertise and wisdom',
     members: [
       {
         id: 'a1',
@@ -63,12 +115,12 @@ const teamDepartments: TeamDepartment[] = [
         role: 'Faculty Advisor',
         department: 'ETCE',
         image: '/assets/team images/chinmoysir.jpeg',
-        bio: 'Faculty advisor providing guidance and support for the IOTA JU Chapter.',
+        bio: 'Faculty advisor providing guidance and support for the IOTA JU .',
         social: {
           linkedin: 'https://www.linkedin.com/in/dr-chinmoy-ghorai',
           email: 'chinmoy.ghorai@gmail.com'
         },
-        skills: ['Mentorship', 'Research', 'Blockchain']
+        skills: ['Mentorship', 'Research', 'AI/ML']
       },
       {
         id: 'a2',
@@ -76,7 +128,7 @@ const teamDepartments: TeamDepartment[] = [
         role: 'Faculty Co-Advisor',
         department: 'ETCE',
         image: '/assets/team images/shelimaam.jpeg',
-        bio: 'Faculty co-advisor supporting the IOTA JU Chapter initiatives and activities.',
+        bio: 'Faculty co-advisor supporting the IOTA JU initiatives and activities.',
         social: {
           linkedin: 'https://www.linkedin.com/in/dr-sheli-sinha-chaudhuri',
           email: 'sheli.sinha@jadavpuruniversity.in'
@@ -96,7 +148,7 @@ const teamDepartments: TeamDepartment[] = [
         role: 'Head of Public Relations and Operations',
         department: 'ETCE',
         image: '/assets/team images/saptarshi.jpeg',
-        bio: 'Leading public relations and operational strategies for IOTA JU Chapter.',
+        bio: 'Leading public relations and operational strategies for IOTA JU.',
         social: {
           linkedin: 'https://www.linkedin.com/in/saptarshi-garai',
           github: 'https://github.com/Sap-7',
@@ -111,7 +163,7 @@ const teamDepartments: TeamDepartment[] = [
         role: 'Head of Content',
         department: 'ETCE',
         image: '/assets/team images/Koach.png',
-        bio: 'Overseeing content strategy and development for IOTA JU Chapter.',
+        bio: 'Overseeing content strategy and development for IOTA JU.',
         social: {
           linkedin: 'https://www.linkedin.com/in/anish-chanda',
           github: 'https://github.com/GAZ739',
@@ -126,14 +178,14 @@ const teamDepartments: TeamDepartment[] = [
         role: 'Head of Tech',
         department: 'ETCE',
         image: '/assets/team images/Anurag.jpeg',
-        bio: 'Leading the technical initiatives and development at IOTA JU Chapter.',
+        bio: 'Leading the technical initiatives and development at IOTA JU.',
         social: {
           linkedin: 'https://www.linkedin.com/in/anurag-kar',
           github: 'https://github.com/Anurag369-create',
           instagram: 'https://instagram.com/anuragkar52',
           email: 'anuragkar660@gmail.com'
         },
-        skills: ['Technical Leadership', 'Blockchain', 'Development']
+        skills: ['Technical Leadership', 'AI/ML', 'Development']
       },
       {
         id: 'b4',
@@ -141,7 +193,7 @@ const teamDepartments: TeamDepartment[] = [
         role: 'Head of Design',
         department: 'ETCE',
         image: '/assets/team images/Nayan.png',
-        bio: 'Leading the design vision and creative direction for IOTA JU Chapter.',
+        bio: 'Leading the design vision and creative direction for IOTA JU.',
         social: {
           linkedin: 'https://www.linkedin.com/in/nayan-singha',
           instagram: 'https://instagram.com/with_void',
@@ -170,7 +222,7 @@ const teamDepartments: TeamDepartment[] = [
         role: 'Board Member',
         department: 'ETCE',
         image: '/assets/team images/parthiv.jpeg',
-        bio: 'Contributing to the strategic direction and initiatives of IOTA JU Chapter.',
+        bio: 'Contributing to the strategic direction and initiatives of IOTA JU.',
         social: {
           linkedin: 'https://www.linkedin.com/in/parthiv-paul',
           github: 'https://github.com/ParthivPaul1',
@@ -182,9 +234,95 @@ const teamDepartments: TeamDepartment[] = [
     ]
   },
   {
+    id: 'team-leads',
+    name: 'Team Leads',
+    description: 'Leading various technical and operational teams',
+    members: [
+      {
+        id: 'tl1',
+        name: 'Soham Saha',
+        role: 'Head of Web Development',
+        department: 'Team Leads',
+        image: '/assets/team images/sohamsaha.jpg',
+        bio: 'Leading the web development team in building and maintaining digital solutions.',
+        social: {
+          linkedin: 'https://www.linkedin.com/in/soham-saha-123456',
+          github: 'https://github.com/sohamsaha',
+          email: 'soham@example.com'
+        },
+        skills: ['Web Development', 'Frontend', 'Backend']
+      },
+      {
+        id: 'tl2',
+        name: 'Arghya Pratim Biswas',
+        role: 'Head of Operations',
+        department: 'Team Leads',
+        image: '/assets/team images/arghyapratim.jpg',
+        bio: 'Overseeing operational strategies and team coordination.',
+        social: {
+          linkedin: '#',
+          email: 'arghya@example.com'
+        },
+        skills: ['Operations', 'Management', 'Coordination']
+      },
+      {
+        id: 'tl3',
+        name: 'Subhojit Khatua',
+        role: 'Head of Tech',
+        department: 'Team Leads',
+        image: '/assets/team images/subhojeetkhatua.jpeg',
+        bio: 'Leading technical initiatives and innovation.',
+        social: {
+          linkedin: '#',
+          email: 'subhojit@example.com'
+        },
+        skills: ['Technical Leadership', 'AI/ML', 'Development']
+      },
+      {
+        id: 'tl4',
+        name: 'Sahana Sharmin',
+        role: 'Head of PR',
+        department: 'Team Leads',
+        image: '/assets/team images/sahanasharmin.jpg',
+        bio: 'Leading public relations and communications.',
+        social: {
+          linkedin: 'https://www.linkedin.com/in/sahana-sharmin',
+          email: 'sahana@example.com'
+        },
+        skills: ['Public Relations', 'Communication', 'Networking']
+      },
+      {
+        id: 'tl5',
+        name: 'Rohit Sharma',
+        role: 'Head of Design',
+        department: 'Team Leads',
+        image: '/assets/team images/ROHITSHARMA.jpeg',
+        bio: 'Leading the design vision and creative direction.',
+        social: {
+          linkedin: '#',
+          email: 'rohit@example.com'
+        },
+        skills: ['UI/UX', 'Graphic Design', 'Branding']
+      },
+      {
+        id: 'tl6',
+        name: 'Koushik Kar',
+        role: 'Head of Content',
+        department: 'Team Leads',
+        image: '/assets/team images/koushikkar.jpeg',
+        bio: 'Leading content strategy and development.',
+        social: {
+          linkedin: 'https://www.linkedin.com/in/koushik-kar',
+          email: 'koushik@example.com'
+        },
+        skills: ['Content Strategy', 'Writing', 'Editing']
+      }
+    ]
+  },
+  {
     id: 'web',
     name: 'Web Development',
-    description: 'Building and maintaining the digital presence of IOTA JU',
+    description: 'Building and maintaining the digital presence',
     members: [
       {
         id: 'w1',
@@ -245,16 +383,16 @@ const teamDepartments: TeamDepartment[] = [
       {
         id: 'w5',
         name: 'Abhay Singh',
-        role: 'Blockchain Developer',
+        role: 'AI/ML Developer',
         department: 'Web Development',
-        image: '/public/assets/team images/abhay.jpg',
-        bio: 'Specialized in blockchain integration and smart contracts.',
+        image: '/assets/team images/abhay.jpg',
+        bio: 'Specialized in AI/ML and devops integration.',
         social: {
           linkedin: '#',
           github: '#',
           email: 'carlos.rodriguez@example.com'
         },
-        skills: ['Solidity', 'Ethereum', 'Smart Contracts']
+        skills: [ 'DevOps' ,'AI/ML', 'Frontend']
       },
       {
         id: 'w6',
@@ -319,19 +457,7 @@ const teamDepartments: TeamDepartment[] = [
         },
         skills: ['Public Relations', 'Communication', 'Event Management']
       },
-      {
-        id: 'p2',
-        name: 'Arka Chatterjee',
-        role: 'PR & Logistics Team Member',
-        department: 'ETCE',
-        image: '/assets/team images/arka.jpg',
-        bio: 'Passionate about building relationships and managing communications.',
-        social: {
-          email: 'arkachatterjee857@gmail.com',
-          instagram: 'https://instagram.com/call_mearka'
-        },
-        skills: ['Public Relations', 'Networking', 'Coordination']
-      },
+      
       {
         id: 'p3',
         name: 'Manish Kumar',
@@ -345,20 +471,7 @@ const teamDepartments: TeamDepartment[] = [
         },
         skills: ['Media Relations', 'Communication', 'Social Media']
       },
-      {
-        id: 'p4',
-        name: 'Sudipto Biswas',
-        role: 'PR & Logistics Team Member',
-        department: 'Chemical Engineering',
-        image: '/assets/team images/sudiptobiswas.jpeg',
-        bio: 'Committed to effective communication and public relations.',
-        social: {
-          linkedin: 'https://www.linkedin.com/in/sudipto-biswas',
-          instagram: 'https://instagram.com/s.i.d.b.i.s.12',
-          email: 'sudiptobiswas101@gmail.com'
-        },
-        skills: ['Public Relations', 'Content Creation', 'Networking']
-      },
+      
       {
         id: 'p5',
         name: 'Sahana Sharmin',
@@ -372,39 +485,13 @@ const teamDepartments: TeamDepartment[] = [
         },
         skills: ['Public Relations', 'Event Planning', 'Communication']
       },
-      {
-        id: 'p6',
-        name: 'Munmun Biswas',
-        role: 'PR & Logistics Team Member',
-        department: 'ETCE',
-        image: '/assets/team images/mumunbiswas.jpg',
-        bio: 'Dedicated to managing logistics and public relations effectively.',
-        social: {
-          linkedin: 'https://www.linkedin.com/in/munmun-biswas',
-          instagram: 'https://instagram.com/munmunbiswas530',
-          email: 'munmunbiswas530@gmail.com'
-        },
-        skills: ['Logistics', 'Coordination', 'Public Relations']
-      },
-      {
-        id: 'p7',
-        name: 'Avik Das',
-        role: 'PR & Logistics Team Member',
-        department: 'ETCE',
-        image: '/assets/team images/avik.jpg',
-        bio: 'Skilled in managing public relations and logistics operations.',
-        social: {
-          linkedin: 'https://www.linkedin.com/in/avik-das',
-          instagram: 'https://instagram.com/avik.das',
-          email: 'avik35797@gmail.com'
-        },
-        skills: ['Public Relations', 'Logistics', 'Event Management']
-      }
+      
+      
     ]
   },
   {
     id: 'tech',
-    name: 'Tech',
+    name: 'Technical Team',
     description: 'Driving innovation in AI/ML, hardware, and electronics',
     members: [
       {
@@ -422,19 +509,7 @@ const teamDepartments: TeamDepartment[] = [
         },
         skills: ['AI/ML', 'Python', 'Data Science']
       },
-      {
-        id: 't2',
-        name: 'Deepra Basak',
-        role: 'Tech Team Member',
-        department: 'Electrical Engineering',
-        image: '/assets/team images/Deepra Basak.jpeg',
-        bio: 'Focused on hardware design and embedded systems development.',
-        social: {
-          instagram: 'https://instagram.com/basakdeepra',
-          email: 'basakdeepra@gmail.com'
-        },
-        skills: ['Circuit Design', 'Microcontrollers', 'Signal Processing']
-      },
+      
       {
         id: 't3',
         name: 'Arnab Karmakar',
@@ -500,6 +575,7 @@ const teamDepartments: TeamDepartment[] = [
         },
         skills: ['UI/UX', 'Figma', 'Illustration', 'Branding']
       },
+
       {
         id: 'd2',
         name: 'Ayantika Datta',
@@ -514,26 +590,13 @@ const teamDepartments: TeamDepartment[] = [
           email: 'ayantikainbox@gmail.com'
         },
         skills: ['UI Design', 'User Research', 'Prototyping', 'Visual Design']
-      },
-      {
-        id: 'd3',
-        name: 'Shoumik Mukherjee',
-        role: 'Design Team Member',
-        department: 'Mechanical Engineering',
-        image: '/assets/team images/shoumikmukherjee.jpg',
-        bio: 'Bringing creative solutions to life through thoughtful design and innovation.',
-        social: {
-          linkedin: 'https://www.linkedin.com/in/shoumik-mukherjee',
-          email: 'mshoumik232@gmail.com',
-          instagram: 'https://instagram.com/mshoumik232'
-        },
-        skills: ['Graphic Design', '3D Modeling', 'Product Design']
       }
+      
     ]
   },
   {
     id: 'content',
-    name: 'Content',
+    name: 'Content Team',
     description: 'Crafting engaging content and narratives',
     members: [
       {
@@ -621,64 +684,115 @@ const teamDepartments: TeamDepartment[] = [
   }
 ];
 
+/**
+ * TeamCard Component
+ * 
+ * Displays a single team member's information in a card format.
+ * Features:
+ * - Animated entry with staggered delay based on index
+ * - Hover effects with additional details
+ * - Social media links
+ * - Skills tags
+ * 
+ * @param {Object} props - Component props
+ * @param {TeamMember} props.member - Team member data to display
+ * @param {number} props.index - Index used for staggered animations
+ * @returns {JSX.Element} Rendered team member card
+ */
 const TeamCard = ({ member, index }: { member: TeamMember; index: number }) => {
+  // Track hover state for interactive effects
   const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef(null);
+  
+  // Ref for the card element to check if it's in viewport
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  // Check if the card is in the viewport (only once)
   const isInView = useInView(cardRef, { once: true });
 
   return (
+    // Main card container with animation and hover effects
     <motion.div
       ref={cardRef}
+      // Initial state (hidden, slightly below)
       initial={{ opacity: 0, y: 20 }}
+      // Animate when in view with staggered delay based on index
       animate={{ 
         opacity: isInView ? 1 : 0, 
         y: isInView ? 0 : 20,
-        transition: { delay: index * 0.1 }
+        transition: { delay: index * 0.1 } // Staggered animation
       }}
+      // Hover animation
       whileHover={{ y: -10, transition: { duration: 0.3 } }}
-      className="relative group bg-card rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden"
+      className="relative group bg-card rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col items-center text-center w-[280px] mx-auto"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      aria-label={`Team member: ${member.name}, ${member.role}`}
     >
-      <div className="relative z-10 flex flex-col h-full">
-        <div className="flex items-start gap-4 mb-4">
-          <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-primary">
-            <img 
-              src={member.image} 
-              alt={member.name}
-              className="w-full h-full object-cover"
-            />
-            <motion.div 
-              className="absolute inset-0 bg-primary/20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: isHovered ? 1 : 0 }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
-          <div className="space-y-1">
-            <h3 className="text-lg font-bold">{member.name}</h3>
-            <div className="mt-1">
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20">
+      {/* Card content container */}
+      <div className="relative z-10 w-full flex flex-col">
+        {/* Member image - full width */}
+        <div className="w-full aspect-square overflow-hidden">
+          <img 
+            src={member.image} 
+            alt={`${member.name}'s profile picture`}
+            className="w-full h-full object-cover"
+            loading="lazy"
+          />
+          {/* Hover overlay effect */}
+          <motion.div 
+            className="absolute inset-0 bg-primary/20"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isHovered ? 1 : 0 }}
+            transition={{ duration: 0.3 }}
+            aria-hidden="true"
+          />
+        </div>
+        
+        {/* Content section */}
+        <div className="p-2.5 w-full">
+          {/* Member name and role */}
+          <div className="space-y-1 w-full">
+            <h3 className="text-base font-semibold">{member.name}</h3>
+            <p className="text-sm text-muted-foreground">{member.role}</p>
+            <div className="mt-2">
+              <span 
+                className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20"
+                aria-label={`Department: ${member.department}`}
+              >
                 {member.department}
               </span>
             </div>
           </div>
+          
+          {/* Member bio */}
+          <div className="mt-2">
+            <p className="text-sm text-muted-foreground text-center line-clamp-2" aria-label="Bio">
+              {member.bio}
+            </p>
+          </div>
         </div>
         
-        <p className="text-sm mb-4 line-clamp-3 mt-2">{member.bio}</p>
-        
-        <div className="flex flex-wrap gap-2 mb-4 mt-auto">
+        {/* Skills/tags section */}
+        <div 
+          className="flex flex-wrap justify-center gap-1.5 mb-4 mt-3 px-2"
+          aria-label="Skills"
+        >
           {member.skills.map((skill, i) => (
             <span 
               key={i}
-              className="text-xs px-2 py-1 bg-muted rounded-full"
+              className="text-[11px] px-1.5 py-0.5 bg-muted/80 rounded-full"
+              aria-label={skill}
             >
               {skill}
             </span>
           ))}
         </div>
         
-        <div className="flex gap-2 mt-3">
+        {/* Social media links */}
+        <div 
+          className="flex justify-center gap-3 mt-4"
+          aria-label="Social media links"
+        >
           {Object.entries(member.social).map(([platform, url]) => (
             url && (
               <a
@@ -689,19 +803,26 @@ const TeamCard = ({ member, index }: { member: TeamMember; index: number }) => {
                 className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
                 aria-label={`${member.name}'s ${platform}`}
               >
-                <SocialIcon platform={platform} className="w-4 h-4" />
+                <SocialIcon 
+                  platform={platform} 
+                  className="w-4 h-4" 
+                  aria-hidden="true"
+                />
+                <span className="sr-only">{platform}</span>
               </a>
             )
           ))}
         </div>
       </div>
       
-      {/* Animated background elements */}
+      {/* Animated background gradient that appears on hover */}
       <motion.div 
         className="absolute inset-0 -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
+          // Initial gradient position
           background: 'radial-gradient(circle at 75% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)',
         }}
+        // Animate gradient position for subtle movement effect
         animate={{
           background: [
             'radial-gradient(circle at 75% 30%, rgba(99, 102, 241, 0.1) 0%, transparent 50%)',
@@ -710,27 +831,53 @@ const TeamCard = ({ member, index }: { member: TeamMember; index: number }) => {
           ],
         }}
         transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: 'easeInOut',
+          duration: 10, // Longer duration for subtle animation
+          repeat: Infinity, // Loop the animation
+          ease: 'easeInOut', // Smooth easing
         }}
+        aria-hidden="true" // Hide from screen readers as it's purely decorative
       />
     </motion.div>
   );
 };
 
+/**
+ * TeamPage Component
+ * 
+ * Main page component that displays the entire team in an organized layout.
+ * Features:
+ * - Department-based filtering of team members
+ * - Search functionality to find specific members
+ * - Responsive grid layout
+ * - Smooth animations and transitions
+ * 
+ * @returns {JSX.Element} The rendered team page
+ */
 export default function TeamPage() {
+  // State for active department filter
   const [activeTeam, setActiveTeam] = useState('all');
+  
+  // State for search query
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // Ref for the container element for scroll behavior
   const containerRef = useRef<HTMLDivElement>(null);
   
-  // Get all team departments for filtering
+  /**
+   * Get all team members across all departments
+   * Used when 'All' filter is selected
+   */
   const allMembers = teamDepartments.flatMap(dept => dept.members);
 
-  // Filter members based on active team and search query
-  const filteredMembers = (activeTeam === 'all' 
-    ? allMembers 
-    : teamDepartments.find(dept => dept.id === activeTeam)?.members || []
+  /**
+   * Filter members based on:
+   * 1. Active department filter
+   * 2. Search query (name, role, or skills)
+   */
+  const filteredMembers = (
+    activeTeam === 'all' 
+      ? allMembers 
+      : teamDepartments.find(dept => dept.id === activeTeam)?.members || []
   ).filter(member => 
     member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
     member.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -739,17 +886,26 @@ export default function TeamPage() {
     )
   );
 
-  // Get the active team's name for the heading
+  /**
+   * Get the display name for the active team/department
+   * Shows 'Our Team' when viewing all teams or the specific department name
+   */
   const activeTeamName = activeTeam === 'all' 
     ? 'Our Team' 
     : teamDepartments.find(d => d.id === activeTeam)?.name || 'Team';
 
-  // Group members by their team for display
+  /**
+   * Group filtered members by their respective departments
+   * This creates an array of departments that only includes departments
+   * containing members that match the current search/filter criteria
+   */
   const membersByTeam = teamDepartments.reduce((acc, team) => {
+    // Find all members in this department that match the current filters
     const teamMembers = filteredMembers.filter(member => 
       team.members.some(m => m.id === member.id)
     );
     
+    // Only include departments that have matching members
     if (teamMembers.length > 0) {
       acc.push({
         id: team.id,
@@ -762,21 +918,29 @@ export default function TeamPage() {
   }, [] as Array<{id: string, name: string, description: string, members: TeamMember[]}>);
 
   return (
-    <div className="min-h-screen bg-background" ref={containerRef}>
-      <div className="container mx-auto px-4 py-16">
+    // Main container with minimum height to fill the viewport
+    <div className="min-h-screen relative" ref={containerRef}>
+      {/* Page content container with responsive padding */}
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        {/* Animated header section */}
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
+          {/* Main heading with gradient text */}
           <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
             Our IoT & Innovation Team
           </h1>
+          
+          {/* Subtitle/description */}
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             A diverse team of engineers, researchers, and developers driving innovation in IoT, machine learning, and distributed systems with IOTA technology
           </p>
           
+          {/* Search and filter section */}
           <div className="mt-8 max-w-2xl mx-auto">
+            {/* Search input with icon */}
             <div className="relative">
               <input
                 type="text"
@@ -784,8 +948,10 @@ export default function TeamPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full px-6 py-3 rounded-full border border-input bg-background text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                aria-label="Search team members"
               />
-              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground">
+              {/* Search icon */}
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <circle cx="11" cy="11" r="8"></circle>
                   <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -793,9 +959,13 @@ export default function TeamPage() {
               </div>
             </div>
             
+            {/* Department filter tabs */}
             <div className="mt-6 w-full flex justify-center">
+              {/* Container for filter tabs with subtle background */}
               <div className="bg-muted/30 rounded-full p-0.5 inline-flex">
-                <div className="flex rounded-full bg-background shadow-sm divide-x divide-muted/20">
+                {/* Inner container for the tabs */}
+                <div className="flex rounded-full bg-background shadow-sm divide-x divide-muted/20 overflow-x-auto">
+                  {/* 'All' filter button */}
                   <button
                     onClick={() => setActiveTeam('all')}
                     className={`px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap ${
@@ -803,9 +973,12 @@ export default function TeamPage() {
                         ? 'bg-primary text-primary-foreground shadow-sm'
                         : 'text-muted-foreground hover:bg-muted/50'
                     }`}
+                    aria-pressed={activeTeam === 'all'}
+                    aria-label="Show all team members"
                   >
                     All
                   </button>
+                  {/* Department filter buttons */}
                   {teamDepartments.map((dept) => (
                     <button
                       key={dept.id}
@@ -815,6 +988,8 @@ export default function TeamPage() {
                           ? 'bg-primary text-primary-foreground shadow-sm'
                           : 'text-muted-foreground hover:bg-muted/50'
                       }`}
+                      aria-pressed={activeTeam === dept.id}
+                      aria-label={`Show ${dept.name} team`}
                     >
                       {dept.name}
                     </button>
@@ -827,76 +1002,105 @@ export default function TeamPage() {
         
         {/* Team Filter Buttons */}
 
-      <AnimatePresence>
+      {/* Animated container for team sections */}
+      <AnimatePresence mode="wait">
         <motion.div 
           layout
           className="space-y-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
         >
+          {/* Check if there are any members to display */}
           {membersByTeam.length > 0 ? (
+            // Map through each department with members
             membersByTeam.map((team) => (
               <motion.div 
                 key={team.id}
+                className="w-full mb-12"
                 layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="space-y-4"
               >
-                <div>
-                  <h2 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-purple-600">
-                    {team.name}
-                  </h2>
-                  {team.description && (
-                    <p className="text-muted-foreground mt-2">{team.description}</p>
-                  )}
-                </div>
-                
                 <motion.div 
-                  layout
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-6"
+                  className="relative mb-12 flex justify-center"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                  {team.members.map((member, index) => (
-                    <TeamCard 
-                      key={member.id} 
-                      member={member} 
-                      index={index}
-                    />
-                  ))}
+                  <h3 className="text-4xl md:text-5xl font-bold text-center">
+                    <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                      {team.name}
+                    </span>
+                  </h3>
                 </motion.div>
+                <div className="w-full">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8 max-w-[900px] mx-auto" style={{ justifyItems: 'center' }}>
+                    {team.members.map((member, index) => (
+                      <TeamCard 
+                        key={member.id}
+                        member={member}
+                        index={index}
+                      />
+                    ))}
+                  </div>
+                </div>
               </motion.div>
             ))
           ) : (
+            // No results state
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="text-center py-16"
+              aria-live="polite"
+              aria-atomic="true"
             >
+              {/* No results illustration */}
               <div className="mx-auto w-24 h-24 mb-6 rounded-full bg-muted flex items-center justify-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-muted-foreground">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  width="40" 
+                  height="40" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="1.5" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  className="text-muted-foreground"
+                  aria-hidden="true"
+                >
                   <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
                   <circle cx="9" cy="7" r="4"></circle>
                   <line x1="23" y1="21" x2="16" y2="14"></line>
                   <line x1="16" y1="21" x2="23" y2="14"></line>
                 </svg>
               </div>
-              <h3 className="text-xl font-medium mb-2">No members found</h3>
+              
+              {/* No results message */}
+              <h3 className="text-xl font-semibold mb-2">No team members found</h3>
               <p className="text-muted-foreground">
-                Try adjusting your search or filter to find what you're looking for.
+                {searchQuery 
+                  ? `No team members match "${searchQuery}"`
+                  : 'No team members available at the moment.'
+                }
               </p>
-              <Button 
-                variant="outline" 
-                className="mt-4"
-                onClick={() => {
-                  setSearchQuery('');
-                  setActiveTeam('all');
-                }}
-              >
-                Clear filters
-              </Button>
+              
+              {/* Clear search button (only shown when there's an active search) */}
+              {searchQuery && (
+                <Button 
+                  variant="outline" 
+                  className="mt-4"
+                  onClick={() => setSearchQuery('')}
+                  aria-label="Clear search"
+                >
+                  Clear search
+                </Button>
+              )}
             </motion.div>
           )}
         </motion.div>

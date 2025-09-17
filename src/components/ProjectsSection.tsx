@@ -1,53 +1,29 @@
-import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Github, Cpu, Zap, Wifi, Brain, ArrowRight, Code, Server, Smartphone, Database } from 'lucide-react';
-import projectsImage from '@/assets/projects.jpg';
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { ProjectType } from '@/types';
 
-const ProjectsSection = () => {
-  const projects = [
-    {
-      title: 'Smart Campus Monitoring',
-      description: 'IoT-based environmental monitoring system for the entire JU campus with real-time data visualization.',
-      technologies: ['Arduino', 'Raspberry Pi', 'LoRaWAN', 'React'],
-      status: 'Ongoing',
-      icon: <Wifi className="h-6 w-6" />,
-      category: 'Environmental'
-    },
-    {
-      title: 'AI-Powered Home Automation',
-      description: 'Intelligent home automation system using machine learning to predict and adapt to user preferences.',
-      technologies: ['Python', 'TensorFlow', 'ESP32', 'MQTT'],
-      status: 'Completed',
-      icon: <Brain className="h-6 w-6" />,
-      category: 'AI/ML'
-    },
-    {
-      title: 'Smart Energy Management',
-      description: 'Energy optimization system for university buildings using IoT sensors and predictive analytics.',
-      technologies: ['Node.js', 'InfluxDB', 'Grafana', 'ESP8266'],
-      status: 'Ongoing',
-      icon: <Zap className="h-6 w-6" />,
-      category: 'Energy'
-    },
-    {
-      title: 'Connected Healthcare Device',
-      description: 'Wearable health monitoring device with real-time vitals tracking and emergency alerts.',
-      technologies: ['C++', 'Bluetooth', 'Firebase', 'Flutter'],
-      status: 'Planning',
-      icon: <Cpu className="h-6 w-6" />,
-      category: 'Healthcare'
-    }
-  ];
+interface ProjectsSectionProps {
+  projects: ProjectType[];
+}
 
+const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
   const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'Ongoing': return 'bg-yellow-500/20 text-yellow-600';
-      case 'Completed': return 'bg-green-500/20 text-green-600';
-      case 'Planning': return 'bg-blue-500/20 text-blue-600';
-      default: return 'bg-gray-500/20 text-gray-600';
+    switch (status.toLowerCase()) {
+      case 'completed':
+        return 'bg-green-100 text-green-800';
+      case 'active':
+        return 'bg-blue-100 text-blue-800';
+      case 'in development':
+        return 'bg-yellow-100 text-yellow-800';
+      case 'pilot':
+        return 'bg-purple-100 text-purple-800';
+      case 'planning':
+        return 'bg-gray-100 text-gray-800';
+      default:
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
@@ -67,15 +43,8 @@ const ProjectsSection = () => {
   };
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(var(--primary)/0.1),transparent_70%)]" />
-      </div>
-
-      <div className="container mx-auto px-4">
-        {/* Section Header */}
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+      <div className="max-w-7xl mx-auto">
         <motion.div 
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -94,9 +63,8 @@ const ProjectsSection = () => {
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
         <motion.div 
-          className="grid md:grid-cols-2 gap-8"
+          className={`grid gap-8 ${projects.length === 1 ? 'max-w-3xl mx-auto' : 'md:grid-cols-2'}`}
           variants={container}
           initial="hidden"
           whileInView="show"
@@ -105,21 +73,20 @@ const ProjectsSection = () => {
           <AnimatePresence>
             {projects.map((project, index) => (
               <motion.div 
-                key={index}
+                key={project.id}
                 variants={item}
                 className="h-full"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
                 <Card className="h-full flex flex-col overflow-hidden border-border/30 hover:border-primary/50 transition-all duration-300 group">
                   <div className="relative h-48 overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/5 to-primary/20">
-                      {project.icon}
-                    </div>
+                    <img 
+                      src={project.image} 
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                       <div>
-                        <Badge variant="secondary" className="mb-2">
-                          {project.category}
-                        </Badge>
                         <span className={`text-sm px-3 py-1 rounded-full font-medium ${getStatusColor(project.status)}`}>
                           {project.status}
                         </span>
@@ -138,36 +105,25 @@ const ProjectsSection = () => {
                   
                   <CardContent className="flex-grow">
                     <div className="flex flex-wrap gap-2 mb-4">
-                      {project.technologies.map((tech, techIndex) => (
+                      {project.tags.map((tag, tagIndex) => (
                         <Badge 
-                          key={techIndex} 
+                          key={tagIndex} 
                           variant="outline" 
                           className="text-xs bg-background/50 backdrop-blur-sm"
                         >
-                          {tech}
+                          {tag}
                         </Badge>
                       ))}
                     </div>
                   </CardContent>
                   
-                  <CardFooter className="border-t border-border/30 p-4">
-                    <div className="flex w-full gap-2">
-                      <Button 
-                        variant="outline" 
-                        size="sm" 
-                        className="flex-1 group-hover:bg-primary/10 group-hover:border-primary/30 transition-colors"
-                      >
-                        <ExternalLink className="h-4 w-4 mr-2" />
-                        View Details
-                      </Button>
-                      <Button 
-                        variant="ghost" 
-                        size="sm" 
-                        className="group-hover:bg-primary/5 transition-colors"
-                      >
-                        <Github className="h-4 w-4" />
-                      </Button>
-                    </div>
+                  <CardFooter className="border-t border-border/30 p-6">
+                    <a 
+                      href={`/projects/${project.slug}`}
+                      className="inline-flex items-center text-sm font-medium text-primary hover:underline group"
+                    >
+                      Learn more <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </a>
                   </CardFooter>
                 </Card>
               </motion.div>

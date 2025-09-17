@@ -43,7 +43,7 @@ const EventsSection = () => {
         {/* Recent Events Hero */}
         <div className="relative rounded-2xl overflow-hidden mb-16 h-96">
           <img
-            src={eventsImage}
+            src={'/events/homeevnts.jpg'}
             alt="Prize distribution event"
             className="w-full h-full object-cover"
           />

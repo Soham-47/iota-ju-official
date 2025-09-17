@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 const iotaLogo = '/assets/common/iota-logo.png';
+const juLogo = '/assets/team images/JULogo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,14 +18,11 @@ const Header = () => {
   ];
 
   return (
-    <header className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border">
+    <header className="fixed top-0 w-full z-50 bg-white/3 backdrop-blur-lg border-b border-white/3 shadow-lg">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <img src={iotaLogo} alt="IOTA Logo" className="h-10 w-auto" />
-          <div>
-            <h1 className="text-xl font-bold text-primary">IOTA</h1>
-            <p className="text-xs text-muted-foreground">Jadavpur University</p>
-          </div>
+          <img src={juLogo} alt="JU Logo" className="h-10 w-auto" />
         </div>
 
         {/* Desktop Navigation */}

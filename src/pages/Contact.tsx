@@ -77,6 +77,21 @@ const Contact = () => {
                 </div>
               </div>
             ))}
+            
+            {/* Google Maps Embed */}
+            <div className="mt-8">
+              <h3 className="text-lg font-semibold mb-4">Our Location</h3>
+              <div className="rounded-lg overflow-hidden shadow-md">
+                <iframe 
+                  className="w-full h-64 md:h-80 rounded-lg"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </div>
+            </div>
           </motion.div>
 
           {/* Contact Form */}
@@ -144,18 +159,6 @@ const Contact = () => {
             </form>
           </motion.div>
         </div>
-
-        {/* Map */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-16 rounded-xl overflow-hidden"
-        >
-          <div className="aspect-w-16 aspect-h-9 w-full h-96 bg-muted/30 flex items-center justify-center">
-            <span className="text-muted-foreground">Map will be displayed here</span>
-          </div>
-        </motion.div>
       </div>
     </div>
   );
