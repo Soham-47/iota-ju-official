@@ -30,21 +30,21 @@ const getEventTypeColor = (type: EventType['type']) => {
 
 // Image gallery component with grid layout
 const EventImageGallery = () => {
-  // Array of image paths from the events folder
+  // Array of image paths from the public/events folder
   const eventImages = [
     '/events/gallery pic 1.jpg',
-    
     '/events/prizedistribution.jpg',
-    
     '/events/carousel4.png',
-    
     '/events/carousel6.jpg',
     '/events/carousel7.jpg',
     '/events/aboutus.jpg',
-    
-    
-    
   ];
+  
+  // Helper function to get the correct image path
+  const getImagePath = (path: string) => {
+    // Ensure the path doesn't start with a slash
+    return path.startsWith('/') ? path : `/${path}`;
+  };
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -56,10 +56,16 @@ const EventImageGallery = () => {
           transition={{ type: 'spring', stiffness: 400, damping: 10 }}
         >
           <img 
-            src={image} 
+            src={getImagePath(image)} 
             alt={`Event ${index + 1}`}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
             loading="lazy"
+            onError={(e) => {
+              // Fallback in case image fails to load
+              const target = e.target as HTMLImageElement;
+              target.onerror = null;
+              target.src = '/placeholder.svg';
+            }}
           />
           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
             <div className="bg-white/90 text-black px-3 py-1 rounded-full text-sm font-medium">
