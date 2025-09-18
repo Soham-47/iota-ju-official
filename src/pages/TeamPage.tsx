@@ -145,10 +145,10 @@ const teamDepartments: TeamDepartment[] = [
       {
         id: 'b1',
         name: 'Saptarshi Garai',
-        role: 'Head of Public Relations and Operations',
+        role: 'President',
         department: 'ETCE',
         image: '/assets/team images/saptarshi.jpeg',
-        bio: 'Leading public relations and operational strategies for IOTA JU.',
+        bio: 'Leading the IOTA JU board with his vision and leadership.',
         social: {
           linkedin: 'https://www.linkedin.com/in/saptarshi-garai',
           github: 'https://github.com/Sap-7',
@@ -160,10 +160,10 @@ const teamDepartments: TeamDepartment[] = [
       {
         id: 'b2',
         name: 'Anish Chanda',
-        role: 'Head of Content',
+        role: 'Secretary',
         department: 'ETCE',
         image: '/assets/team images/Koach.png',
-        bio: 'Overseeing content strategy and development for IOTA JU.',
+        bio: 'Overseeing the day-to-day operations of IOTA JU.',
         social: {
           linkedin: 'https://www.linkedin.com/in/anish-chanda',
           github: 'https://github.com/GAZ739',
@@ -175,10 +175,10 @@ const teamDepartments: TeamDepartment[] = [
       {
         id: 'b3',
         name: 'Anurag Kar',
-        role: 'Head of Tech',
+        role: 'Secretary',
         department: 'ETCE',
         image: '/assets/team images/Anurag.jpeg',
-        bio: 'Leading the technical initiatives and development at IOTA JU.',
+        bio: 'Overseeing the day-to-day operations of IOTA JU.',
         social: {
           linkedin: 'https://www.linkedin.com/in/anurag-kar',
           github: 'https://github.com/Anurag369-create',
@@ -204,10 +204,10 @@ const teamDepartments: TeamDepartment[] = [
       {
         id: 'b5',
         name: 'Srijan Roy',
-        role: 'Head of Web Development',
+        role: 'Secretary',
         department: 'ETCE',
         image: '/assets/team images/srijan.jpg',
-        bio: 'Leading web development initiatives and technical implementations.',
+        bio: 'Overseeing the day-to-day operations of IOTA JU.',
         social: {
           linkedin: 'https://www.linkedin.com/in/srijan-roy',
           github: 'https://github.com/SrijanRoy123-github',
@@ -219,10 +219,10 @@ const teamDepartments: TeamDepartment[] = [
       {
         id: 'b6',
         name: 'Parthiv Paul',
-        role: 'Board Member',
+        role: 'Secretary',
         department: 'ETCE',
         image: '/assets/team images/parthiv.jpeg',
-        bio: 'Contributing to the strategic direction and initiatives of IOTA JU.',
+        bio: 'Overseeing the day-to-day operations of IOTA JU.',
         social: {
           linkedin: 'https://www.linkedin.com/in/parthiv-paul',
           github: 'https://github.com/ParthivPaul1',

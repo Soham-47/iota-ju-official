@@ -86,6 +86,23 @@ const Index = () => {
     },
   ];
 
+  // Animation variants
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  };
+
   return (
     <div className="relative min-h-screen">
       <StarField />
@@ -102,15 +119,27 @@ const Index = () => {
                 <motion.div
                   key={index}
                   className="absolute inset-0 bg-cover bg-center"
+                  initial={{ opacity: 0, scale: 1.1 }}
+                  animate={{
+                    opacity: currentSlide === index ? 1 : 0,
+                    scale: currentSlide === index ? 1 : 1.1,
+                  }}
+                  transition={{ 
+                    duration: 1.2,
+                    ease: [0.4, 0, 0.2, 1]
+                  }}
                   style={{
                     backgroundImage: `url(${slide.image})`,
-                    opacity: currentSlide === index ? 1 : 0,
                     zIndex: currentSlide === index ? 1 : 0,
                     pointerEvents: currentSlide === index ? 'auto' : 'none',
-                    transition: 'opacity 1s ease-in-out',
                   }}
                 >
-                  <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
+                  <motion.div 
+                    className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8 }}
+                  />
                 </motion.div>
               ))}
             </div>
@@ -119,36 +148,101 @@ const Index = () => {
             <div className="relative z-10 w-full h-full flex items-start pt-16 justify-center px-4">
               <div className="w-full max-w-4xl mx-auto text-center mt-20">
                 {slides.map((slide, index) => (
-                  <div 
+                  <motion.div 
                     key={index}
-                    className="w-full flex flex-col items-center justify-center absolute top-0 left-0 right-0"
-                    style={{
+                    className="w-full flex flex-col items-center justify-center absolute top-0 left-0 right-0 px-4"
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{
                       opacity: currentSlide === index ? 1 : 0,
-                      transition: 'opacity 0.5s ease-in-out',
+                      y: currentSlide === index ? 0 : 30,
+                    }}
+                    transition={{ 
+                      duration: 0.8,
+                      ease: [0.4, 0, 0.2, 1],
+                      delay: currentSlide === index ? 0.3 : 0
+                    }}
+                    style={{
                       pointerEvents: currentSlide === index ? 'auto' : 'none',
                       visibility: currentSlide === index ? 'visible' : 'hidden',
-                      transform: currentSlide === index ? 'translateY(0)' : 'translateY(20px)',
                     }}
                   >
-                    <h1 className="text-4xl md:text-6xl font-bold mb-6">
+                    <motion.h1 
+                      className="text-4xl md:text-6xl font-bold mb-6"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2, duration: 0.8 }}
+                    >
                       {slide.title} <span className="text-primary">{slide.highlight}</span>
-                    </h1>
-                    <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+                    </motion.h1>
+                    <motion.p 
+                      className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4, duration: 0.8 }}
+                    >
                       {slide.description}
-                    </p>
-                    <div className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full">
-                      <Button size="lg" asChild className="w-full sm:w-auto">
-                        <Link to={slide.button1Link}>
-                          {slide.button1} <ArrowRight className="h-4 w-4 ml-2" />
-                        </Link>
-                      </Button>
-                      <Button variant="outline" size="lg" asChild className="w-full sm:w-auto">
-                        <Link to={slide.button2Link}>
-                          {slide.button2}
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
+                    </motion.p>
+                    <motion.div 
+                      className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ 
+                        delay: 0.6, 
+                        staggerChildren: 0.1,
+                        delayChildren: 0.6
+                      }}
+                    >
+                      <motion.div
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                      >
+                        <Button 
+                          size="lg" 
+                          className="w-full sm:w-auto"
+                          asChild
+                        >
+                          <Link 
+                            to={slide.button1Link}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                              setTimeout(() => {
+                                window.location.href = slide.button1Link;
+                              }, 100);
+                            }}
+                          >
+                            {slide.button1} <ArrowRight className="h-4 w-4 ml-2" />
+                          </Link>
+                        </Button>
+                      </motion.div>
+                      <motion.div
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                      >
+                        <Button 
+                          variant="outline" 
+                          size="lg" 
+                          className="w-full sm:w-auto"
+                          asChild
+                        >
+                          <Link 
+                            to={slide.button2Link}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              window.scrollTo({ top: 0, behavior: 'smooth' });
+                              setTimeout(() => {
+                                window.location.href = slide.button2Link;
+                              }, 100);
+                            }}
+                          >
+                            {slide.button2}
+                          </Link>
+                        </Button>
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -207,7 +301,16 @@ const Index = () => {
                 <div className="inline-flex items-center gap-3 bg-background/80 backdrop-blur-sm px-6 py-3 rounded-full border border-border/50 shadow-sm">
                   <span className="text-sm font-medium text-muted-foreground">Ready to join us?</span>
                   <Button size="sm" asChild>
-                    <Link to="/contact">
+                    <Link 
+                      to="/contact"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        setTimeout(() => {
+                          window.location.href = '/contact';
+                        }, 100);
+                      }}
+                    >
                       Get Started <ArrowRight className="h-4 w-4 ml-2" />
                     </Link>
                   </Button>
@@ -245,9 +348,16 @@ const Index = () => {
                       Our team is collaborating with local authorities to implement IOTA's Tangle technology for efficient IoT device communication in urban infrastructure.
                     </p>
                     <Button variant="link" className="p-0 h-auto" asChild>
-                      <a href="#" className="text-primary hover:no-underline">
+                      <Link 
+                        to="#" 
+                        className="text-primary hover:no-underline"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          // Handle read more action here
+                        }}
+                      >
                         Read More <ArrowRight className="ml-1 h-4 w-4 inline" />
-                      </a>
+                      </Link>
                     </Button>
                   </div>
                 </motion.div>
@@ -270,7 +380,17 @@ const Index = () => {
                       Our recent IoT hardware hackathon brought together 100+ participants to build innovative solutions using IOTA's feeless microtransactions for machine-to-machine communication.
                     </p>
                     <Button variant="link" className="p-0 h-auto" asChild>
-                      <Link to="/events" className="text-primary hover:no-underline">
+                      <Link 
+                        to="/events" 
+                        className="text-primary hover:no-underline"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          setTimeout(() => {
+                            window.location.href = '/events';
+                          }, 100);
+                        }}
+                      >
                         View Event Photos <ArrowRight className="ml-1 h-4 w-4 inline" />
                       </Link>
                     </Button>
@@ -295,9 +415,16 @@ const Index = () => {
                       Our team's research on "Machine Learning at the Edge with IOTA" has been published in the Journal of IoT and Embedded Systems.
                     </p>
                     <Button variant="link" className="p-0 h-auto" asChild>
-                      <a href="#" className="text-primary hover:no-underline">
+                      <Link 
+                        to="#" 
+                        className="text-primary hover:no-underline"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          // Handle read paper action here
+                        }}
+                      >
                         Read Paper <ArrowRight className="ml-1 h-4 w-4 inline" />
-                      </a>
+                      </Link>
                     </Button>
                   </div>
                 </motion.div>
@@ -305,7 +432,16 @@ const Index = () => {
 
               <div className="mt-12 text-center justify-center items-center flex mr-10">
                 <Button variant="outline" asChild>
-                  <Link to="/news">
+                  <Link 
+                    to="/news"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                      setTimeout(() => {
+                        window.location.href = '/news';
+                      }, 100);
+                    }}
+                  >
                     View All News & Updates
                   </Link>
                 </Button>
@@ -341,7 +477,16 @@ const Index = () => {
                       Learn about our mission, vision, and the passionate team behind IOTA JU. Discover our journey and what drives us forward in the world of distributed ledger technology.
                     </p>
                     <Button asChild variant="outline" className="w-full">
-                      <Link to="/about">
+                      <Link 
+                        to="/about"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          setTimeout(() => {
+                            window.location.href = '/about';
+                          }, 100);
+                        }}
+                      >
                         Learn More <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
@@ -365,7 +510,16 @@ const Index = () => {
                       Stay updated with our upcoming workshops, hackathons, and networking events. Join us to learn, collaborate, and grow in the blockchain space.
                     </p>
                     <Button asChild variant="outline" className="w-full">
-                      <Link to="/events">
+                      <Link 
+                        to="/events"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          setTimeout(() => {
+                            window.location.href = '/events';
+                          }, 100);
+                        }}
+                      >
                         View Events <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
@@ -389,7 +543,16 @@ const Index = () => {
                       Explore our innovative projects leveraging IOTA technology. From research initiatives to real-world applications, see how we're building the future.
                     </p>
                     <Button asChild variant="outline" className="w-full">
-                      <Link to="/projects">
+                      <Link 
+                        to="/projects"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          setTimeout(() => {
+                            window.location.href = '/projects';
+                          }, 100);
+                        }}
+                      >
                         View Projects <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
@@ -415,12 +578,30 @@ const Index = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <Button size="lg" asChild>
-                    <Link to="/contact">
+                    <Link 
+                      to="/contact"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        setTimeout(() => {
+                          window.location.href = '/contact';
+                        }, 100);
+                      }}
+                    >
                       Contact Us
                     </Link>
                   </Button>
                   <Button variant="outline" size="lg" asChild>
-                    <Link to="/team">
+                    <Link 
+                      to="/team"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        setTimeout(() => {
+                          window.location.href = '/team';
+                        }, 100);
+                      }}
+                    >
                       Meet the Team
                     </Link>
                   </Button>

@@ -43,7 +43,7 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/5 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto">
         <motion.div 
           className="text-center mb-16"
@@ -63,15 +63,18 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
           </p>
         </motion.div>
 
+        {/* First Row - Two Projects */}
         <motion.div 
-          className={`grid gap-8 ${projects.length === 1 ? 'max-w-3xl mx-auto' : 'md:grid-cols-2'}`}
+          className="grid gap-8 md:grid-cols-2"
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
         >
           <AnimatePresence>
-            {projects.map((project, index) => (
+            {projects
+              .filter(project => project.slug !== 'autonomous-drone-technology')
+              .map((project, index) => (
               <motion.div 
                 key={project.id}
                 variants={item}
@@ -128,6 +131,77 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
                 </Card>
               </motion.div>
             ))}
+          </AnimatePresence>
+        </motion.div>
+
+        {/* Second Row - Drone Project */}
+        <motion.div 
+          className="max-w-3xl mx-auto mt-12"
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          <AnimatePresence>
+            {projects
+              .filter(project => project.slug === 'autonomous-drone-technology')
+              .map((project) => (
+                <motion.div 
+                  key={project.id}
+                  variants={item}
+                  className="h-full"
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                >
+                  <Card className="h-full flex flex-col overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md hover:border-primary/50 transition-all duration-300 group shadow-lg hover:shadow-xl">
+                    <div className="relative h-48 overflow-hidden">
+                      <img 
+                        src={project.image} 
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                        <div>
+                          <span className={`text-sm px-3 py-1 rounded-full font-medium ${getStatusColor(project.status)}`}>
+                            {project.status}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <CardHeader>
+                      <CardTitle className="text-xl font-bold group-hover:text-primary transition-colors">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="line-clamp-2">
+                        {project.description}
+                      </CardDescription>
+                    </CardHeader>
+                    
+                    <CardContent className="flex-grow">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.map((tag, tagIndex) => (
+                          <Badge 
+                            key={tagIndex} 
+                            variant="outline" 
+                            className="text-xs bg-background/50 backdrop-blur-sm"
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                    
+                    <CardFooter className="border-t border-border/30 p-6">
+                      <a 
+                        href={`/projects/${project.slug}`}
+                        className="inline-flex items-center text-sm font-medium text-primary hover:underline group"
+                      >
+                        Learn more <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </a>
+                    </CardFooter>
+                  </Card>
+                </motion.div>
+              ))}
           </AnimatePresence>
         </motion.div>
 
